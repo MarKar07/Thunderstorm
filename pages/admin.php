@@ -273,6 +273,7 @@ try {
                                     <input type="hidden" name="mark_feedback" value="1">
                                 </form>
                                 <form method="post" style="display: inline; margin-left: 5px;">
+                                    <?php echo csrf_field(); ?>
                                     <input type="hidden" name="feedback_id" value="<?php echo $fb['id']; ?>">
                                     <button type="submit" name="delete_feedback" value="1" onclick="return confirm('Haluatko varmasti poistaa palautteen?')">Poista</button>
                                 </form>
