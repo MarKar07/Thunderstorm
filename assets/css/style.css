@@ -1,0 +1,1503 @@
+/* ========================================
+   THUNDERSTORM ROCK FESTIVAL - CSS
+   Optimoitu versio (2025)
+   ========================================
+   
+   SISÄLLYSLUETTELO:
+   1. Reset & Perusasetukset
+   2. Navigaatio
+   3. Hero-osiot
+   4. Painikkeet
+   5. Lomakkeet
+   6. Viestit
+   7. Osiot & Kortit
+   8. Taulukot
+   9. Artistikortit
+   10. Footer
+   11. Animoidut taustat
+   12. Scroll-to-top nappi
+   13. Toast-notifikaatiot
+   14. Loading-animaatio
+   15. Animaatiot
+   16. Responsiivisuus
+   ======================================== */
+
+/* ========================================
+   1. RESET & PERUSASETUKSET
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Animoidut tausta-blobit */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 20%;
+    right: 10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, 
+        rgba(255, 107, 53, 0.15),
+        rgba(239, 68, 68, 0.1),
+        transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float-blob 25s ease-in-out infinite;
+}
+
+.blob-2 {
+    position: fixed;
+    bottom: 15%;
+    left: 15%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, 
+        rgba(255, 167, 38, 0.12),
+        rgba(255, 107, 53, 0.08),
+        transparent 65%);
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: -1;
+    animation: float-blob-2 30s ease-in-out infinite reverse;
+    pointer-events: none;
+}
+
+.blob-3 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, 
+        rgba(239, 68, 68, 0.08),
+        rgba(255, 107, 53, 0.06),
+        transparent 60%);
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    animation: float-blob-3 40s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* ========================================
+   2. NAVIGAATIO
+   ======================================== */
+header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-bottom: 3px solid #ff6b35;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav h1 {
+    color: #ff6b35;
+    font-size: 1.8em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+nav h1 img {
+    height: 50px;
+    width: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 10px 18px;
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+nav ul li a:hover {
+    background: #ff6b35;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.5);
+    border-color: #ffa726;
+}
+
+/* Shimmer-efekti navigaatiolle */
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+nav ul li a:hover::before {
+    left: 100%;
+}
+
+/* Hampurilaismenu */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.mobile-menu span {
+    width: 28px;
+    height: 3px;
+    background: #ff6b35;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.mobile-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ========================================
+   3. HERO-OSIOT
+   ======================================== */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Hero etusivu */
+.hero-section {
+    position: relative;
+    min-height: 500px;
+    padding: 120px 20px;
+    text-align: center;
+    margin: -40px -20px 40px -20px;
+    border-bottom: 5px solid #ff6b35;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.hero-background-1,
+.hero-background-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-background-1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('../images/concert-316464_1920.jpg');
+    opacity: 1;
+}
+
+.hero-background-2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('../images/concert-7149741_1920.jpg');
+    opacity: 0;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: 4em;
+    color: #fff;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+    animation: fadeInDown 1s ease;
+}
+
+.hero-text {
+    font-size: 1.5em;
+    color: #ffa726;
+    margin: 20px 0;
+}
+
+.event-date {
+    font-size: 1.8em;
+    color: #fff;
+    background: rgba(255, 107, 53, 0.8);
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5);
+}
+
+/* Hero tapahtumasivu */
+.hero-event {
+    position: relative;
+    background-color: #1a1a1a;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/concert-705914_1920.jpg');
+    background-size: cover;
+    background-position: center center;
+    min-height: 400px;
+    padding: 120px 20px;
+    text-align: center;
+    margin: -40px -20px 40px -20px;
+    border-bottom: 4px solid #ff6b35;
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+}
+
+.hero-event h1 {
+    font-size: 3.5em;
+    color: #fff;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    animation: fadeInDown 0.8s ease;
+}
+
+.hero-event .hero-text {
+    font-size: 1.5em;
+    color: #ffa726;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 2;
+}
+
+/* Hero yhteystiedot */
+.hero-contact {
+    position: relative;
+    background-color: #1a1a1a;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('../images/concert-7149741_1920.jpg');
+    background-size: cover;
+    background-position: center center;
+    min-height: 400px;
+    padding: 120px 20px;
+    text-align: center;
+    margin: -40px -20px 40px -20px;
+    border-bottom: 4px solid #ff6b35;
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+}
+
+.hero-contact h1 {
+    font-size: 3.5em;
+    color: #fff;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    animation: fadeInDown 0.8s ease;
+}
+
+.hero-contact .hero-text {
+    font-size: 1.5em;
+    color: #ffa726;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================
+   4. TYPOGRAFIA & LINKIT
+   ======================================== */
+h1 {
+    color: #ff6b35;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(255, 107, 53, 0.5);
+}
+
+h2 {
+    color: #ffa726;
+    font-size: 2em;
+    margin: 30px 0 15px 0;
+    border-bottom: 3px solid #ff6b35;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #ffb74d;
+    font-size: 1.5em;
+    margin: 20px 0 10px 0;
+}
+
+p {
+    margin-bottom: 15px;
+    color: #d0d0d0;
+}
+
+a {
+    color: #ffa726;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ff6b35;
+    text-decoration: underline;
+}
+
+ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+li {
+    margin: 8px 0;
+    color: #d0d0d0;
+}
+
+/* ========================================
+   5. PAINIKKEET
+   ======================================== */
+.cta-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ff6b35, #ffa726);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 2px solid #ffa726;
+}
+
+.btn-secondary:hover {
+    background: #ffa726;
+    color: #0a0a0a;
+}
+
+button {
+    background: linear-gradient(45deg, #ff6b35, #ffa726);
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
+}
+
+button[type="reset"] {
+    background: linear-gradient(45deg, #555, #777);
+    margin-left: 10px;
+}
+
+/* Ripple-efekti napeille */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+/* ========================================
+   6. LOMAKKEET
+   ======================================== */
+form {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #ff6b35;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+label {
+    color: #ffa726;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #555;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+select option {
+    background: #2a2a2a;
+    color: #fff;
+    padding: 10px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #ff6b35;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+    animation: input-focus 0.3s ease;
+}
+
+/* Shake animation for errors */
+.shake {
+    animation: shake 0.5s ease;
+}
+
+/* ========================================
+   7. VIESTIT
+   ======================================== */
+.message {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.success {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4caf50;
+    color: #81c784;
+}
+
+.error {
+    background: rgba(244, 67, 54, 0.2);
+    border: 2px solid #f44336;
+    color: #e57373;
+}
+
+/* ========================================
+   8. OSIOT & KORTIT
+   ======================================== */
+section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 15px;
+    border-left: 5px solid #ff6b35;
+}
+
+.intro-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.feature {
+    background: rgba(255, 107, 53, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid #ff6b35;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.feature::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b35, #ffa726, #ff6b35);
+    border-radius: 15px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(10px);
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.feature:hover::before {
+    opacity: 0.7;
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* ========================================
+   9. TAULUKOT
+   ======================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(45deg, #ff6b35, #ffa726);
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #d0d0d0;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+tr:hover {
+    background: rgba(255, 107, 53, 0.1);
+}
+
+table select {
+    width: auto;
+    padding: 5px 10px;
+    margin: 0;
+    background: #2a2a2a;
+    border: 1px solid #ff6b35;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+table select:focus {
+    outline: none;
+    border-color: #ffa726;
+    box-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+}
+
+table button,
+table input[type="submit"] {
+    background: #dc3545;
+    color: white;
+    padding: 6px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+table button:hover,
+table input[type="submit"]:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+}
+
+table form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+table td form {
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+}
+
+table * {
+    outline: none !important;
+}
+
+/* ========================================
+   10. ARTISTIKORTIT
+   ======================================== */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.artist-card {
+    position: relative;
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid #ff6b35;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+}
+
+.artist-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+    border-color: #ffa726;
+}
+
+.artist-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease;
+}
+
+.artist-card:hover .artist-card-bg {
+    transform: scale(1.1);
+}
+
+.artist-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.3) 0%, 
+        rgba(0, 0, 0, 0.7) 60%,
+        rgba(0, 0, 0, 0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    transition: background 0.4s ease;
+}
+
+.artist-card:hover .artist-card-overlay {
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.4) 0%, 
+        rgba(0, 0, 0, 0.8) 50%,
+        rgba(0, 0, 0, 0.98) 100%);
+}
+
+.artist-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ff6b35;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.artist-time {
+    font-size: 1em;
+    color: #ffa726;
+    margin-bottom: 10px;
+}
+
+.artist-day {
+    display: inline-block;
+    background: rgba(255, 107, 53, 0.3);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    border: 1px solid #ff6b35;
+}
+
+.artist-type {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(45deg, #ff6b35, #ffa726);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 107, 53, 0.5);
+}
+
+/* ========================================
+   11. FOOTER
+   ======================================== */
+footer {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border-top: 3px solid #ff6b35;
+    padding: 50px 20px 20px 20px;
+    margin-top: 80px;
+    color: #999;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    color: #ff6b35;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.footer-section p,
+.footer-section ul {
+    color: #aaa;
+    line-height: 1.8;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #aaa;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff6b35;
+    padding-left: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 107, 53, 0.1);
+    border: 2px solid #ff6b35;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 36px;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #ff6b35;
+    color: #0a0a0a;
+    transform: translateY(-3px);
+    padding-left: 0;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    text-align: center;
+    color: #666;
+}
+
+.footer-logo {
+    height: 120px;
+    margin-bottom: 15px;
+    filter: brightness(0.7);
+}
+
+/* ========================================
+   12. SCROLL-TO-TOP NAPPI
+   ======================================== */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff6b35, #ffa726);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* ========================================
+   13. SCROLL-ANIMAATIOT
+   ======================================== */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ========================================
+   14. TOAST-NOTIFIKAATIOT
+   ======================================== */
+.toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 300px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.toast::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: progress 3s linear;
+}
+
+.toast-success {
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    color: white;
+}
+
+.toast-error {
+    background: linear-gradient(135deg, #f44336, #e57373);
+    color: white;
+}
+
+.toast-info {
+    background: linear-gradient(135deg, #ff6b35, #ffa726);
+    color: white;
+}
+
+.toast i {
+    font-size: 1.5em;
+}
+
+.toast-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+/* ========================================
+   15. LOADING-ANIMAATIO
+   ======================================== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.loading-spinner::before,
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: #ff6b35;
+}
+
+.loading-spinner::before {
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+}
+
+.loading-spinner::after {
+    width: 60px;
+    height: 60px;
+    top: 10px;
+    left: 10px;
+    border-top-color: #ffa726;
+    animation: spin 0.7s linear infinite reverse;
+}
+
+/* ========================================
+   16. ANIMAATIOT (KEYFRAMES)
+   ======================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float-blob {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.7;
+    }
+    33% {
+        transform: translate(50px, -80px) rotate(120deg);
+        opacity: 1;
+    }
+    66% {
+        transform: translate(-40px, 60px) rotate(240deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes float-blob-2 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-60px, -40px) scale(1.1);
+        opacity: 0.9;
+    }
+}
+
+@keyframes float-blob-3 {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -60%) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        filter: blur(10px);
+    }
+    50% {
+        filter: blur(15px);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes input-focus {
+    0% {
+        box-shadow: 0 0 0 rgba(255, 107, 53, 0);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   17. RESPONSIIVISUUS
+   ======================================== */
+
+/* Tablet (1024px ja alle) */
+@media (max-width: 1024px) {
+    section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        min-width: 800px;
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px 10px;
+        white-space: nowrap;
+    }
+}
+
+/* Mobiili (768px ja alle) */
+@media screen and (max-width: 768px) {
+    /* Navigaatio */
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    
+    /* Hampurilaismenu */
+    .mobile-menu {
+        display: flex;
+    }
+    
+    nav ul {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        border-top: 2px solid #ff6b35;
+        z-index: 999;
+    }
+    
+    nav ul.mobile-active {
+        display: flex !important;
+    }
+    
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    nav ul li a {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        padding: 15px 20px;
+    }
+    
+    /* Hero */
+    .hero-section h1 {
+        font-size: 2.5em;
+    }
+    
+    /* Painikkeet */
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    /* Lomakkeet */
+    form {
+        padding: 20px;
+    }
+    
+    /* Taulukot */
+    table tr th:nth-child(1),
+    table tr td:nth-child(1),
+    table tr th:nth-child(5),
+    table tr td:nth-child(5) {
+        display: none;
+    }
+    
+    table {
+        font-size: 13px;
+    }
+    
+    th, td {
+        padding: 6px 8px;
+    }
+    
+    table button,
+    table input[type="submit"] {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+    
+    table select {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    /* Blobit */
+    body::after {
+        width: 300px;
+        height: 300px;
+        filter: blur(60px);
+    }
+    
+    .blob-2,
+    .blob-3 {
+        width: 250px;
+        height: 250px;
+        filter: blur(50px);
+    }
+    
+    /* Scroll-to-top */
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2em;
+    }
+    
+    /* Toast */
+    .toast-container {
+        right: 10px;
+        left: 10px;
+    }
+    
+    .toast {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+/* Pieni mobiili (480px ja alle) */
+@media (max-width: 480px) {
+    nav h1 {
+        font-size: 1.2em;
+    }
+    
+    nav h1 img {
+        height: 35px;
+    }
+    
+    nav ul li a {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    
+    .hero-section {
+        padding: 60px 15px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2em;
+    }
+    
+    /* Taulukot kortteina */
+    table {
+        min-width: 100%;
+        border: none;
+    }
+    
+    table thead {
+        display: none;
+    }
+    
+    table tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 2px solid #ff6b35;
+        border-radius: 10px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    table td {
+        display: block;
+        text-align: left;
+        padding: 8px 0;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    
+    table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        color: #ffa726;
+    }
+    
+    table tr th:nth-child(1),
+    table tr td:nth-child(1),
+    table tr th:nth-child(5),
+    table tr td:nth-child(5) {
+        display: block;
+    }
+}

@@ -1,0 +1,35 @@
+# Arkaluontoiset tiedostot
+config/database.php
+
+# Lokit (turvallisuuslokit sisältävät arkaluontoista dataa)
+logs/
+*.log
+
+# Järjestelmätiedostot
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE-tiedostot
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temp-tiedostot
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.bak
+*.backup
+*.old
+
+# Node modules (jos käytät joskus npm:ää)
+node_modules/
+
+# Environment-tiedostot
+.env
+.env.local
+.env.production
