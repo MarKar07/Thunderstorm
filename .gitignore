@@ -1,7 +1,10 @@
 # Arkaluontoiset tiedostot
 config/database.php
+.env
+.env.local
+.env.production
 
-# Lokit (turvallisuuslokit sisältävät arkaluontoista dataa)
+# Lokit
 logs/
 *.log
 
@@ -26,10 +29,15 @@ desktop.ini
 *.backup
 *.old
 
-# Node modules (jos käytät joskus npm:ää)
+# Node modules
 node_modules/
 
-# Environment-tiedostot
-.env
-.env.local
-.env.production
+# Vendor (jos käytät Composeria)
+vendor/
+
+# Cache
+cache/
+*.cache
+
+# Uploads (jos tulee)
+uploads/

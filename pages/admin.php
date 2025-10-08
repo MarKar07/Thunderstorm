@@ -262,6 +262,7 @@ try {
                             </td>
                             <td data-label="Toiminnot">
                                 <form method="post" style="display: inline;">
+                                    <?php echo csrf_field(); ?>
                                     <input type="hidden" name="feedback_id" value="<?php echo $fb['id']; ?>">
                                     <select name="status" onchange="this.form.submit()">
                                         <option value="">Vaihda tila...</option>
