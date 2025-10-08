@@ -8,6 +8,7 @@ require_once '../config/config.php';
 
 // 2. Käynnistä turvallinen sessio
 require_once '../includes/session.php';
+secure_session_start();
 
 // 3. Lataa turvallisuusfunktiot
 require_once '../includes/security.php';
@@ -16,7 +17,6 @@ require_once '../includes/rate_limit.php';
 require_once '../includes/error_handler.php';
 
 // 4. Lataa tietokanta
-session_start();
 include '../config/database.php';
 
 // Tarkistetaan että käyttäjä on kirjautunut ja admin
