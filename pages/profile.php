@@ -58,6 +58,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         log_error("CSRF token verification failed on profile");
     } else {
         $post_keys = array_keys($_POST);
+
+        // PROFIILIN POISTO
+if (in_array('delete_account', $post_keys)) {
+    $confirm = sanitize_string($_POST['confirm_delete'] ?? '');
+    
+    if ($confirm === 'POISTA') {
+        try {
+            // Poista käyttäjä (CASCADE poistaa automaattisesti profiilin ja ilmoittautumiset)
+            $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->execute([$user_id]);
+            
+            log_security_event('account_deleted', [
+                'user_id' => $user_id,
+                'username' => $_SESSION['username']
+            ]);
+            
+            // Kirjaa ulos
+            destroy_session();
+            
+            // Ohjaa etusivulle viestillä
+            header("Location: ../index.php");
+            exit();
+            
+        } catch (PDOException $e) {
+            handle_db_error($e, "Tilin poisto epäonnistui.");
+        }
+    } else {
+        handle_error("Vahvistus epäonnistui. Kirjoita täsmälleen: POISTA");
+    }
+}
         
         // PROFIILIN PÄIVITYS
         if (in_array('update_profile', $post_keys)) {
@@ -390,6 +420,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             <?php endif; ?>
         </section>
+
+        <!-- PROFIILIN POISTO -->
+<section style="border-left-color: #dc3545;">
+    <h2 style="color: #dc3545; border-bottom-color: #dc3545;">⚠️ Profiilin poisto</h2>
+    <p>Huom! Profiilin poistaminen on <strong>pysyvä</strong> toiminto.</p>
+    
+    <div style="background: rgba(220, 53, 69, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #dc3545; margin: 20px 0;">
+        <h3 style="color: #e57373;">Poista profiili pysyvästi</h3>
+        <p><strong>Poistaminen tuhoaa:</strong></p>
+        <ul>
+            <li>❌ Käyttäjätilisi</li>
+            <li>❌ Kaikki henkilötietosi</li>
+            <li>❌ Tapahtumailmoittautumisesi</li>
+            <li>❌ Kaikki datasi järjestelmästä</li>
+        </ul>
+        <p style="color: #ffa726;"><strong>Tätä toimintoa EI VOI peruuttaa!</strong></p>
+        
+        <form method="post" onsubmit="return confirm('⚠️ VAROITUS ⚠️\n\nOletko AIVAN VARMA että haluat poistaa tilisi PYSYVÄSTI?\n\nTämä poistaa:\n- Käyttäjätilisi\n- Kaikki tietosi\n- Ilmoittautumisesi\n\nTätä EI VOI peruuttaa!\n\nKirjoita vahvistukseksi: POISTA');">
+            <?php echo csrf_field(); ?>
+            
+            <label for="confirm_delete" style="color: #e57373;">Vahvista kirjoittamalla: <strong>POISTA</strong></label>
+            <input type="text" 
+                   id="confirm_delete" 
+                   name="confirm_delete" 
+                   required 
+                   placeholder="Kirjoita: POISTA"
+                   style="border-color: #dc3545;">
+            
+            <button type="submit" 
+                    name="delete_account" 
+                    value="1" 
+                    style="background: linear-gradient(45deg, #dc3545, #c82333);">
+                🗑️ Poista tilini pysyvästi
+            </button>
+        </form>
+    </div>
+</section>
 
         <footer>
             <div class="footer-content">

@@ -177,6 +177,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
             
             <button type="submit">Kirjaudu</button>
+            <p style="text-align: center; margin-top: 10px;">
+            <a href="forgot_password.php">Unohdin salasanan</a></p>
         </form>
         
         <p><a href="register.php">Eikö sinulla ole vielä käyttäjätunnusta? Rekisteröidy tästä.</a></p>

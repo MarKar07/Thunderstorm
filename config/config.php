@@ -12,7 +12,7 @@
 // ========================================
 define('SITE_NAME', 'Thunderstorm Rock Festival');
 define('SITE_TAGLINE', '2025 - Suomen rockaavain festivaali');
-define('SITE_URL', 'http://localhost/thunderstorm'); // Muuta omaksi domainiksi
+define('SITE_URL', 'https://geronimo.okol.org/~markar/Tapahtumasivut/');
 define('ADMIN_EMAIL', 'admin@thunderstormrock.fi');
 
 // ========================================

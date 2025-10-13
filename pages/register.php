@@ -82,8 +82,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             'email' => $email
                         ]);
                         
+                        // Lähetä tervetuloa-email
+                        require_once '../includes/mailer.php';
+                        $email_sent = send_welcome_email($email, $username);
+
+                        if ($email_sent) {
+                            $message = "Rekisteröinti onnistui! Lähetimme tervetuloa-viestin sähköpostiisi. Voit nyt kirjautua sisään.";
+                            log_security_event('welcome_email_sent', [
+                                'username' => $username,
+                                'email' => $email
+                        ]);
+                    } else {
                         $message = "Rekisteröinti onnistui! Voit nyt kirjautua sisään.";
-                        $message_type = "success";
+                        log_error("Welcome email failed to send", ['email' => $email]);
+                    }
+                    $message_type = "success";
                     }
                 } catch (PDOException $e) {
                     handle_db_error($e, "Rekisteröinti epäonnistui. Yritä myöhemmin uudelleen.");
