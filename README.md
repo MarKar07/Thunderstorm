@@ -1,6 +1,7 @@
 # 🎸 Thunderstorm Rock Festival 2025
 
-Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna. Thunderstorm Rock Festival on kattava festivaalin hallintasovellus, joka sisältää käyttäjähallinnan, tapahtumailmoittautumiset, palautejärjestelmän ja admin-paneelin.
+Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna. Thunderstorm Rock Festival on kattava festivaalin hallintasovellus, joka sisältää käyttäjähallinnan, tapahtumailmoittautumiset, palautejärjestelmän ja admin-paneelin. 🌐 Live Demo:
+Katso toimiva versio: [https://geronimo.okol.org/~markar/Tapahtumasivut/](https://geronimo.okol.org/~markar/Tapahtumasivut/)
 
 <p align="center">
   <img src="assets/images/logo.png" alt="Thunderstorm Rock Festival" width="300">
