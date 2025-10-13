@@ -99,8 +99,8 @@ Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna
 
 ---
 
-👨‍💻 Tekijä
+## 👨‍💻 Tekijä
 Kari Markus
 
-Portfolio: markar07.github.io/Portfolio
-GitHub: @MarKar07
+- Portfolio: markar07.github.io/Portfolio
+- GitHub: @MarKar07
