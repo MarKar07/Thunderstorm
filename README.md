@@ -12,10 +12,9 @@ Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna
 
 - [Ominaisuudet](#-ominaisuudet)
 - [Teknologiat](#-teknologiat)
-- [Asennus](#-asennus)
 - [Käyttöohjeet](#-käyttöohjeet)
 - [Tietokantarakenne](#-tietokantarakenne)
-- [Projektin rakenne](#-projektin-rakenne)
+- [Turvallisuus](#-turvallisuus)
 - [Tekijä](#-tekijä)
 
 ---
@@ -24,29 +23,30 @@ Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna
 
 ### Käyttäjille:
 - 🎫 **Käyttäjärekisteröinti ja kirjautuminen**
-  - Turvallinen salasanan hashays
+  - Turvallinen salasanan hashays (bcrypt)
   - Session-pohjainen autentikaatio
+  - Salasanan palautus sähköpostilla
   
 - 👤 **Profiilinhallinta**
   - Henkilötietojen päivitys
   - Salasanan vaihto
+  - Tilin poisto
   - Omien tietojen hallinta
 
 - 🎉 **Tapahtumailmoittautuminen**
-  - Kolme lipputyyppiä: Päivälippu, Viikonloppulippu, VIP
+  - Kolme lipputyyppiä: Päivälippu (35€), Viikonloppulippu (60€), VIP (120€)
   - Ilmoittautumisen peruutus
   - Ilmoittautumishistorian seuranta
 
 - 💬 **Palautelomake**
   - Kategorioitu palaute
-  - Sähköpostivahvistus
   - Yhteydenotto järjestäjiin
 
 ### Admineille:
 - 🛠️ **Admin-hallintapaneeli**
-  - Käyttäjähallinta
+  - Käyttäjähallinta (poisto)
   - Tapahtumailmoittautumisten hallinta
-  - Palauteviestien käsittely
+  - Palauteviestien käsittely (new/read/resolved)
   - Tilastot ja yhteenvedot
 
 - 📊 **Raportit ja tilastot**
@@ -57,18 +57,21 @@ Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna
 ### Ulkoasu ja käyttökokemus:
 - 🎨 **Rock-teemainen design**
   - Animoidut tausta-efektit
+  - Hero-slideshow etusivulla
   - Gradienttipainikkeet
-  - Hover-efektit
+  - Hover-efektit ja animaatiot
 
 - 📱 **Täysin responsiivinen**
   - Toimii kaikilla laitteilla
   - Mobiiliystävällinen hampurilaismenu
   - Responsiiviset taulukot (kortit mobiilissa)
 
-- ✨ **Animaatiot**
-  - Hero-slideshow etusivulla
-  - Fade-in efektit
+- ✨ **Interaktiivisuus**
+  - Toast-notifikaatiot
+  - Scroll-to-top -nappi
   - Smooth scroll
+  - Form validation shake
+  - Ripple effect napeille
 
 ---
 
@@ -78,20 +81,26 @@ Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna
 - PHP 8.x
 - MySQL / MariaDB
 - PDO (PHP Data Objects)
+- PHPMailer (sähköpostilähetys)
 
 **Frontend:**
 - HTML5
-- CSS3 (Custom Properties, Flexbox, Grid)
-- Vanilla JavaScript
+- CSS3 (Custom Properties, Flexbox, Grid, Animations)
+- Vanilla JavaScript (ES6+)
 
 **Turvallisuus:**
 - Password hashing (bcrypt)
 - Prepared statements (SQL injection prevention)
-- Session management
-- Input validation
+- CSRF protection (Cross-Site Request Forgery)
+- XSS prevention (input sanitization & output escaping)
+- Session management (timeout, regeneration, hijacking prevention)
+- Rate limiting (login, registration, contact)
+- Security logging
 
-## 👨‍💻 Tekijä
+---
 
-**Kari Markus**  
-- Portfolio: [markar07.github.io/Portfolio](https://markar07.github.io/Portfolio/)
+👨‍💻 Tekijä
+Kari Markus
 
+Portfolio: markar07.github.io/Portfolio
+GitHub: @MarKar07
