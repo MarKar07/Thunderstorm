@@ -12,8 +12,6 @@ Moderni web-pohjainen festivaalijärjestelmä PHP:lla ja MySQL:llä toteutettuna
 
 - [Ominaisuudet](#-ominaisuudet)
 - [Teknologiat](#-teknologiat)
-- [Käyttöohjeet](#-käyttöohjeet)
-- [Tietokantarakenne](#-tietokantarakenne)
 - [Turvallisuus](#-turvallisuus)
 - [Tekijä](#-tekijä)
 
